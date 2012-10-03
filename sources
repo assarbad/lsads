@@ -1,0 +1,37 @@
+!if $(386)
+TARGETNAME=lsads32
+!elseif $(AMD64)
+TARGETNAME=lsads64
+!else
+TARGETNAME=lsads
+!endif
+TARGETPATH=obj
+TARGETTYPE=PROGRAM
+UNICODE=1
+
+UMTYPE=console
+USE_MSVCRT=1
+USE_STL=1
+STL_VER=70
+USE_NATIVE_EH=1
+
+
+# Create browse info
+#BROWSER_INFO=1
+#BROWSERFILE=<some path>
+
+# Additional defines for the C/C++ preprocessor
+!IF defined(UNICODE) && $(UNICODE)
+UMENTRY=wmain
+C_DEFINES=$(C_DEFINES) /DUNICODE /D_UNICODE
+!ELSE
+UMENTRY=main
+C_DEFINES=$(C_DEFINES) /DMBCS /D_MBCS
+!ENDIF
+
+INCLUDES=$(DDK_INC_PATH);$(CRT_INC_PATH);$(SDK_INC_PATH)
+
+TARGETLIBS=$(SDK_LIB_PATH)\kernel32.lib $(SDK_LIB_PATH)\user32.lib
+
+SOURCES=lsads.cpp \
+        exeversion.rc
