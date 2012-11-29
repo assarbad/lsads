@@ -10,10 +10,8 @@
 /// Purpose          : Class to list ADS on files (NTFS volumes)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
 #ifndef __ALTERNATEDATASTREAMS_H_VER__
 #define __ALTERNATEDATASTREAMS_H_VER__ 2010012621
-// $Id$
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif // Check for "#pragma once" support

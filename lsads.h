@@ -10,9 +10,6 @@
 /// Purpose          : <see lsads.cpp>
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
-// $Id$
-
 #ifndef __LADS_H_VERSION__
 #define __LADS_H_VERSION__ 100
 

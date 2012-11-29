@@ -4,11 +4,7 @@
 ///
 /// The version information resource. Depends on "exeversion.h" header file.
 ///
-/// (File was in the PUBLIC DOMAIN  - Created by: ddkwizard.assarbad.net)
 ///////////////////////////////////////////////////////////////////////////////
-
-// $Id$
-
 #include <winver.h>
 #include <winnt.h>
 

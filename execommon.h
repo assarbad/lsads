@@ -4,11 +4,7 @@
 ///
 /// Useful macros
 ///
-/// (File was in the PUBLIC DOMAIN  - Created by: ddkwizard\.assarbad\.net)
 ///////////////////////////////////////////////////////////////////////////////
-
-// $Id$
-
 #ifndef __EXECOMMON_H_VERSION__
 #define __EXECOMMON_H_VERSION__ 100
 
