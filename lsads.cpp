@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Copyright (c) 2010 - Oliver Schneider (assarbad.net)
+/// Written 2010, Oliver Schneider (assarbad.net) - PUBLIC DOMAIN/CC0
 ///
 /// Original filename: lsads.cpp
 /// Project          : lads

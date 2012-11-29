@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Copyright (c) 2010 - Oliver Schneider (assarbad.net)
+/// Written 2010, Oliver Schneider (assarbad.net) - PUBLIC DOMAIN/CC0
 ///
 /// Defines for the version information in the resource file
 ///
@@ -30,7 +30,7 @@
 #define TEXT_FILEDESC          Allows to list alternate data streams (ADS) on files // component description
 #define TEXT_COMPANY           Oliver Schneider (assarbad.net) // company
 #define TEXT_MODULE            lsads // module name
-#define TEXT_COPYRIGHT         Written  EXE_YEAR TEXT_COMPANY (PUBLIC DOMAIN) // copyright information
+#define TEXT_COPYRIGHT         Written  EXE_YEAR TEXT_COMPANY (PUBLIC DOMAIN/CC0) // copyright information
 #define TEXT_INTERNALNAME      lsads.exe // copyright information
 
 #endif // __EXEVERSION_H_VERSION__
