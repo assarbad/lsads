@@ -16,10 +16,11 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="intermediate\vs8_$(ProjectName)32_$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="1"
 			CharacterSet="1"
+			BuildLogFile="BuildLog_$(TargetName).html"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -54,6 +55,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalOptions="/nologo"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -64,6 +66,7 @@
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
+				OutputFile="bin\$(ProjectName)32_dbg.exe"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -92,10 +95,11 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="intermediate\vs8_$(ProjectName)32_$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="1"
 			CharacterSet="1"
+			BuildLogFile="BuildLog_$(TargetName).html"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -127,6 +131,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalOptions="/nologo"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -139,6 +144,7 @@
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
+				OutputFile="bin\$(ProjectName)32.exe"
 			/>
 			<Tool
 				Name="VCALinkTool"

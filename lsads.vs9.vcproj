@@ -17,10 +17,11 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Debug"
-			IntermediateDirectory="Debug"
+			OutputDirectory="intermediate\vs9_$(ProjectName)32_$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="1"
 			CharacterSet="1"
+			BuildLogFile="BuildLog_$(TargetName).html"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".\"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;"
+				PreprocessorDefinitions="RP_QUERY_FILE_ID;WIN32;_DEBUG;_CONSOLE;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -55,6 +56,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalOptions="/nologo"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -65,6 +67,7 @@
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
+				OutputFile="bin\$(ProjectName)32_dbg.exe"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -90,10 +93,11 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="intermediate\vs9_$(ProjectName)32_$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)"
 			ConfigurationType="1"
 			CharacterSet="1"
+			BuildLogFile="BuildLog_$(TargetName).html"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -113,7 +117,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories=".\"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;"
+				PreprocessorDefinitions="RP_QUERY_FILE_ID;WIN32;NDEBUG;_CONSOLE;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -125,6 +129,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalOptions="/nologo"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -137,6 +142,7 @@
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
+				OutputFile="bin\$(ProjectName)32.exe"
 			/>
 			<Tool
 				Name="VCALinkTool"
