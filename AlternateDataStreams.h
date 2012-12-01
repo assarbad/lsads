@@ -24,7 +24,18 @@
 
 class CAlternateDataStreams
 {
+public:
+    // Allow the header to be included again outside of this file
+    // Still this header needs to be included before anyone else who requires VerySimpleBuf.h
+#   define __VERYSIMPLEBUF_MULTI_INC__
 #   include "VerySimpleBuf.h"
+#   undef __VERYSIMPLEBUF_H_VER__
+    // Just make it more readable
+    typedef CVerySimpleBuf<WCHAR> CWideString, *PWideString;
+    typedef CVerySimpleBuf<CHAR>  CAnsiString, *PAnsiString;
+    typedef CVerySimpleBuf<TCHAR> CTString, *PTString;
+    typedef CVerySimpleBuf<BYTE>  ByteBuf;
+private:
     // Stuff we need to talk to NTDLL
     typedef LONG NTSTATUS;
 
@@ -113,9 +124,6 @@ class CAlternateDataStreams
     static const DWORD dwAllocIncrement = 0x400;
 
 public:
-    // Just make it more readable
-    typedef CVerySimpleBuf<WCHAR> CWideString, *PWideString;
-
     CAlternateDataStreams(WCHAR const* Path)
         : m_Path(normalizePath_(Path))
         , m_Attr(::GetFileAttributesW(m_Path.getBuf()))
