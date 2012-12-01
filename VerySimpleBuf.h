@@ -4,14 +4,16 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __VERYSIMPLEBUF_H_VER__
-#define __VERYSIMPLEBUF_H_VER__ 2012112923
-#if (defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP)
+#define __VERYSIMPLEBUF_H_VER__ 2012120102
+#if !defined(__VERYSIMPLEBUF_MULTI_INC__) && ((defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP))
 #pragma once
 #endif // Check for "#pragma once" support
 
 template <typename T> class CVerySimpleBuf
 {
 public:
+    typedef T ElemType;
+
     CVerySimpleBuf(size_t count = 0)
         : m_buf(0)
         , m_count(0)
@@ -46,7 +48,7 @@ public:
         if(&rval != this)
         {
             reAlloc(0);
-            if(rval.getBuf() && reAlloc(rval.getCount()))
+            if(rval.getBuf() && reAlloc(rval.getCount(), true))
             {
                 memcpy(getBuf(), rval.getBuf(), getMin_(getByteCount(), rval.getByteCount()));
             }
@@ -64,9 +66,9 @@ public:
             {
                 reAlloc(1);
             }
-            else if(reAlloc(len))
+            else if(reAlloc(len, true))
             {
-                memcpy(getBuf(), buf, getMin_(sizeof(T) * len, getByteCount()));
+                memcpy(getBuf(), buf, getByteCount());
             }
         }
         return *this;
@@ -103,7 +105,12 @@ public:
 
     inline bool operator!() const
     {
-        return (0 != m_buf);
+        return (0 == m_buf);
+    }
+
+    inline size_t elemSize() const
+    {
+        return sizeof(ElemType);
     }
 
     void clear()
@@ -114,13 +121,13 @@ public:
         }
     }
 
-    bool reAlloc(size_t count)
+    bool reAlloc(size_t count, bool exact = false)
     {
         T* tempBuf = 0;
         size_t count_ = 0;
         if(count)
         {
-            count_ = getCeil_(count+1);
+            count_ = (!exact) ? getCeil_(count+1) : count;
             if(count_ <= m_count)
             {
                 memset(m_buf + count, 0, sizeof(T) * (m_count - count));
