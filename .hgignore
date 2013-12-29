@@ -15,3 +15,6 @@ bin/*
 buildfre_*.wrn
 buildchk_*.wrn
 intermediate/**
+*.zip
+*.zip.asc
+*.bak
