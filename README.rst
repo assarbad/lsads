@@ -66,7 +66,7 @@ Syntax::
 
 License
 -------
-The tools and the classes are placed into the PUBLIC DOMAIN (CC0).
+The tools and the classes are placed into the PUBLIC DOMAIN/CC0.
 
 .. _my website: https://assarbad.net/stuff/lads.zip
 .. _premake4: https://bitbucket.org/windirstat/windirstat/src/tip/common/premake4.exe
