@@ -11,16 +11,15 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __LADS_H_VERSION__
-#define __LADS_H_VERSION__ 100
+#define __LADS_H_VERSION__ 2017091421
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
 
 
-#include "execommon.h"
 #include "exeversion.h"
 #include <Windows.h>
-#include "AlternateDataStreams.h"
+#include "AlternateDataStreams.hpp"
 
 #endif // __LADS_H_VERSION__

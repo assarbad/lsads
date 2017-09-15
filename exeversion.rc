@@ -5,12 +5,11 @@
 /// The version information resource. Depends on "exeversion.h" header file.
 ///
 ///////////////////////////////////////////////////////////////////////////////
+#include <winnt.rh>
 #include <winver.h>
-#include <winnt.h>
 
 #ifdef RC_INVOKED
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
-#include "execommon.h"
 #include "exeversion.h"
 
 #ifdef DBG
@@ -20,8 +19,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 #endif
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION CREATE_XVER(FILE_MAJVER, FILE_MINVER, FILE_BUILD)
- PRODUCTVERSION CREATE_XVER(PRD_MAJVER, PRD_MINVER, 0)
+ FILEVERSION CREATE_XVER(FILE_MAJVER, FILE_MINVER, FILE_PATCH, FILE_BUILD_NUMERIC)
+ PRODUCTVERSION CREATE_XVER(PRD_MAJVER, PRD_MINVER, PRD_PATCH, PRD_BUILD_NUMERIC)
  FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
  FILEFLAGS ACTUAL_FILEFLAGS
  FILEOS VOS_NT
@@ -40,16 +39,30 @@ BEGIN
 #endif
             VALUE "CompanyName", ANSISTRING(TEXT_COMPANY)
             VALUE "FileDescription", ANSISTRING(TEXT_FILEDESC)
-            VALUE "FileVersion", ANSISTRING(CREATE_FVER(FILE_MAJVER, FILE_MINVER, FILE_BUILD))
+            VALUE "FileVersion", ANSISTRING(CREATE_FVER(FILE_MAJVER, FILE_MINVER, FILE_PATCH, FILE_BUILD))
             VALUE "InternalName", ANSISTRING(TEXT_INTERNALNAME)
             VALUE "LegalCopyright", ANSISTRING(TEXT_COPYRIGHT)
             VALUE "OriginalFilename", ANSISTRING(TEXT_MODULE)
             VALUE "ProductName", ANSISTRING(TEXT_PRODUCTNAME)
-            VALUE "ProductVersion", ANSISTRING(CREATE_PVER(PRD_MAJVER, PRD_MINVER, PRD_BUILD))
+            VALUE "ProductVersion", ANSISTRING(CREATE_PVER(PRD_MAJVER, PRD_MINVER, PRD_PATCH, PRD_BUILD))
+#ifdef TEXT_PORTIONSCOPYRIGHT
+            VALUE "Portions Copyright", TEXT_PORTIONSCOPYRIGHT
+#endif
 #ifdef TEXT_SPECIALBUILD
             VALUE "SpecialBuild", ANSISTRING(TEXT_SPECIALBUILD)
 #endif
+#ifdef TEXT_WEBSITE
             VALUE "Website", ANSISTRING(TEXT_WEBSITE)
+#endif
+#if defined(HG_REV_ID) && defined(HG_REV_NO)
+            VALUE "Mercurial revision", HG_REV_ID " (" ANSISTRING(HG_REV_NO) ")"
+#endif
+#if defined(HG_FULLID)
+            VALUE "Mercurial revision URL", HG_REPOSITORY "/src/" HG_FULLID
+#endif
+#ifdef HG_REPOSITORY
+            VALUE "Mercurial repository", HG_REPOSITORY
+#endif
         END
     END
     BLOCK "VarFileInfo"

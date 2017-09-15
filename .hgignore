@@ -18,3 +18,10 @@ intermediate/**
 *.zip
 *.zip.asc
 *.bak
+hgid.h
+*_release.vs8.sln
+lsads_release/**
+*_release.vs8.vcproj
+buildlog.html
+*.7z
+*.7z.asc

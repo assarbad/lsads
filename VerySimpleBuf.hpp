@@ -3,8 +3,8 @@
 /// Written 2012, Oliver Schneider (assarbad.net) - PUBLIC DOMAIN/CC0
 ///
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef __VERYSIMPLEBUF_H_VER__
-#define __VERYSIMPLEBUF_H_VER__ 2012120102
+#ifndef __VERYSIMPLEBUF_HPP_VER__
+#define __VERYSIMPLEBUF_HPP_VER__ 2017091422
 #if !defined(__VERYSIMPLEBUF_MULTI_INC__) && ((defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP))
 #pragma once
 #endif // Check for "#pragma once" support
@@ -187,4 +187,4 @@ protected:
         return (val) ? wcslen(val) : 0;
     }
 };
-#endif // __VERYSIMPLEBUF_H_VER__
+#endif // __VERYSIMPLEBUF_HPP_VER__

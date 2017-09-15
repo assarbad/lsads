@@ -11,7 +11,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __ALTERNATEDATASTREAMS_H_VER__
-#define __ALTERNATEDATASTREAMS_H_VER__ 2010012621
+#define __ALTERNATEDATASTREAMS_H_VER__ 2017091421
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif // Check for "#pragma once" support
@@ -24,12 +24,16 @@
 
 class CAlternateDataStreams
 {
+    /* hide some default stuff */
+    CAlternateDataStreams& operator=(CAlternateDataStreams&);
+    CAlternateDataStreams();
+    CAlternateDataStreams(CAlternateDataStreams&);
 public:
-    // Allow the header to be included again outside of this file
-    // Still this header needs to be included before anyone else who requires VerySimpleBuf.h
+    // Allow the header to be included again outside of this file (and class)
+    // Still this header needs to be included before anyone else who requires VerySimpleBuf.hpp
 #   define __VERYSIMPLEBUF_MULTI_INC__
-#   include "VerySimpleBuf.h"
-#   undef __VERYSIMPLEBUF_H_VER__
+#   include "VerySimpleBuf.hpp"
+#   undef __VERYSIMPLEBUF_HPP_VER__
     // Just make it more readable
     typedef CVerySimpleBuf<WCHAR> CWideString, *PWideString;
     typedef CVerySimpleBuf<CHAR>  CAnsiString, *PAnsiString;
@@ -232,7 +236,7 @@ private:
                         hFile
                         , &iostat
                         , reinterpret_cast<PVOID>(m_Buffer.getBuf())
-                        , m_Buffer.getByteCount()
+                        , static_cast<ULONG>(m_Buffer.getByteCount())
                         , FileStreamInformation
                         );
                 } while(STATUS_BUFFER_OVERFLOW == status);
