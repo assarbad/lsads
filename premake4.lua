@@ -223,7 +223,7 @@ solution (tgtname .. iif(release, "_release", ""))
         kind            ("ConsoleApp")
         targetname      (tgtname)
         flags           {"Unicode", "NativeWChar", "ExtraWarnings", "WinMain", "NoRTTI",}
-        defines         {"_CONSOLE", "WIN32", "_WINDOWS", "STRICT"}
+        defines         {"_CONSOLE", "WIN32", "_WINDOWS", "STRICT", "_ALLOW_RTCc_IN_STL"}
         targetdir       (iif(release, tgtname .. "_release", "bin"))
         objdir          (int_dir)
         libdirs         {"$(IntDir)"}

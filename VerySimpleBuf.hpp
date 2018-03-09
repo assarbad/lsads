@@ -4,7 +4,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __VERYSIMPLEBUF_HPP_VER__
-#define __VERYSIMPLEBUF_HPP_VER__ 2017091422
+#define __VERYSIMPLEBUF_HPP_VER__ 2018030923
 #if !defined(__VERYSIMPLEBUF_MULTI_INC__) && ((defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP))
 #pragma once
 #endif // Check for "#pragma once" support
@@ -66,9 +66,10 @@ public:
             {
                 reAlloc(1);
             }
-            else if(reAlloc(len, true))
+            else if(reAlloc(len + 1, true))
             {
-                memcpy(getBuf(), buf, getByteCount());
+                memcpy(getBuf(), buf, len * sizeof(T));
+                getBuf()[len] = 0;
             }
         }
         return *this;
