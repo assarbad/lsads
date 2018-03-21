@@ -223,13 +223,13 @@ solution (tgtname .. iif(release, "_release", ""))
         kind            ("ConsoleApp")
         targetname      (tgtname)
         flags           {"Unicode", "NativeWChar", "ExtraWarnings", "WinMain", "NoRTTI",}
-        defines         {"_CONSOLE", "WIN32", "_WINDOWS", "STRICT", "_ALLOW_RTCc_IN_STL"}
         targetdir       (iif(release, tgtname .. "_release", "bin"))
         objdir          (int_dir)
         libdirs         {"$(IntDir)"}
         links           {"version"}
         linkoptions     {"/delay:nobind","/delayload:version.dll"}
         resoptions      {"/nologo", "/l409"}
+        defines         {"_CONSOLE", "WIN32", "_WINDOWS", "STRICT"}
         if not _OPTIONS["msvcrt"] then
             flags       {"StaticRuntime"}
         end
@@ -237,6 +237,7 @@ solution (tgtname .. iif(release, "_release", ""))
         excludes
         {
             "hgid.h",
+            "Backup*.*",
         }
 
         files
@@ -247,9 +248,9 @@ solution (tgtname .. iif(release, "_release", ""))
             "*.h",
             "*.hpp",
             "*.manifest",
-            "*.cmd", "*.txt", "*.md", "*.rst", "premake4.lua",
+            "*.cmd", "*.md", "*.rst", "premake4.lua",
         }
-        
+
         vpaths
         {
             ["Header Files/*"] = { "*.h", "*.hpp" },
@@ -312,7 +313,7 @@ solution (tgtname .. iif(release, "_release", ""))
             linkoptions     {"/subsystem:console,5.02"}
 
         configuration {"vs2013 or vs2015 or vs2017"}
-            defines         {"WINVER=0x0501"}
+            defines         {"WINVER=0x0501", "_ALLOW_RTCc_IN_STL"}
 
         configuration {"vs2002 or vs2003 or vs2005 or vs2008 or vs2010 or vs2012", "x32"}
             defines         {"WINVER=0x0500"}
