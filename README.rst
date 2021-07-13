@@ -1,7 +1,6 @@
 ﻿=========================================
  ``CAlternateDataStreams`` and ``lsads``
 =========================================
-:Author: Oliver Schneider
 
 About
 -----
