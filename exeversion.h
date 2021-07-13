@@ -36,7 +36,7 @@
 #define TEXT_MODULE            lsads // module name
 #define TEXT_COPYRIGHT         Written EXE_YEAR by TEXT_COMPANY (PUBLIC DOMAIN/CC0)
 #define TEXT_INTERNALNAME      lsads.exe
-#define HG_REPOSITORY          "https://bitbucket.org/assarbad/lsads"
+#define HG_REPOSITORY          "https://sourceforge.net/p/lsads/code/"
 
 
 #define _ANSISTRING(text) #text

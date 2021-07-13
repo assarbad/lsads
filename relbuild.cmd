@@ -2,7 +2,7 @@
 setlocal ENABLEEXTENSIONS & pushd .
 set TGTNAME=lsads
 set PRJNAME=%TGTNAME%_release
-set SIGURL=https://bitbucket.org/assarbad/%TGTNAME%
+set SIGURL=https://sourceforge.net/projects/%TGTNAME%
 set SIGDESC=%TGTNAME%: List Alternative Data Streams
 premake4.exe --release vs2005
 call "%~dp0setvcvars.cmd" 2005
