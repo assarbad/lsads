@@ -1,5 +1,4 @@
-﻿=========================================
- ``CAlternateDataStreams`` and ``lsads``
+﻿ ``CAlternateDataStreams`` and ``lsads``
 =========================================
 
 About
