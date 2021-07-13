@@ -3,7 +3,7 @@
         If you don't want to use the code-signed build that can be found in the
         ./common/ subfolder, you can build from the WDS-branch over at:
 
-        https://sourceforge.net/projects/premake4-wds/files/
+        https://sourceforge.net/projects/premake4-wds/
   ]]
 local action = _ACTION or ""
 local release = false
