@@ -31,3 +31,4 @@ obj/
 x64/
 Release/
 Debug/
+BuildCommandLines*.log
