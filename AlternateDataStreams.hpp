@@ -14,9 +14,10 @@
 #include <tchar.h>
 #include <Windows.h>
 #ifndef __NTNATIVE_H_VER__
+#    pragma warning(push)
 #    pragma warning(disable : 4005)
 #    include <ntstatus.h>
-#    pragma warning(default : 4005)
+#    pragma warning(pop)
 #endif // __NTNATIVE_H_VER__
 
 #define WIN32_UNICODE_PREFIX L"\\\\?\\"
@@ -51,9 +52,9 @@ class CAlternateDataStreams
         union
         {
             NTSTATUS Status;
-            PVOID Pointer;
+            PVOID Pointer; //-V117
         };
-        ULONG_PTR Information;
+        ULONG_PTR Information; //-V122
     } IO_STATUS_BLOCK, *PIO_STATUS_BLOCK;
 
     typedef enum _NT_FILE_INFORMATION_CLASS
@@ -180,7 +181,7 @@ class CAlternateDataStreams
 
     WCHAR const* operator[](size_t idx) const
     {
-        if ((idx < m_StreamCount) && (m_StreamNames[idx]))
+        if ((idx < m_StreamCount) && (m_StreamNames[idx])) //-V104
         {
             return m_StreamNames[idx]->getBuf();
         }
@@ -202,9 +203,10 @@ class CAlternateDataStreams
                     DWORD dwNeeded = ::GetCurrentDirectoryW(0, NULL);
                     if (dwNeeded)
                     {
-                        if (sPath.reAlloc((size_t)1 + dwNeeded + sPath.getCount()))
+                        if (sPath.reAlloc((size_t)1 + dwNeeded + sPath.getCount())) //-V104
                         {
-                            if (0 < ::GetCurrentDirectoryW(static_cast<DWORD>(sPath.getCount() - sPath.getCountZ()), sPath.getBuf() + sPath.getCountZ()))
+                            if (0 <
+                                ::GetCurrentDirectoryW(static_cast<DWORD>(sPath.getCount() - sPath.getCountZ()), sPath.getBuf() + sPath.getCountZ())) //-V202
                             {
                                 return sPath;
                             }
@@ -215,9 +217,10 @@ class CAlternateDataStreams
                 LPWSTR filePart = 0;
                 // dummy call to evaluate required length
                 DWORD dwNeeded = ::GetFullPathNameW(Path, 0, sPath.getBuf(), &filePart);
-                if (sPath.reAlloc((size_t)1 + dwNeeded + wcslen(Path)))
+                if (sPath.reAlloc((size_t)1 + dwNeeded + wcslen(Path))) //-V104
                 {
-                    if (0 < ::GetFullPathNameW(Path, static_cast<DWORD>(sPath.getCount() - sPath.getCountZ()), sPath.getBuf() + sPath.getCountZ(), &filePart))
+                    if (0 < ::GetFullPathNameW(
+                                Path, static_cast<DWORD>(sPath.getCount() - sPath.getCountZ()), sPath.getBuf() + sPath.getCountZ(), &filePart)) //-V202
                     {
                         return sPath;
                     }
@@ -259,7 +262,7 @@ class CAlternateDataStreams
                         do
                         {
                             dwReturn++;
-                            curr += psi->NextEntryOffset;
+                            curr += (size_t)psi->NextEntryOffset; //-V201
                             psi = reinterpret_cast<PFILE_STREAM_INFORMATION>((psi->NextEntryOffset) ? curr : 0);
                         } while (psi);
                     }
@@ -284,9 +287,9 @@ class CAlternateDataStreams
             BYTE* curr = m_Buffer.getBuf();
             PFILE_STREAM_INFORMATION psi = reinterpret_cast<PFILE_STREAM_INFORMATION>(curr);
             // Allocate an array
-            m_StreamNames = new PWideString[m_StreamCount]; // may throw
+            m_StreamNames = new PWideString[m_StreamCount]; // may throw //-V121
             // Clear it
-            memset(m_StreamNames, 0, m_StreamCount * sizeof(PWideString));
+            memset(m_StreamNames, 0, m_StreamCount * sizeof(PWideString)); //-V104
             // Directories may have no streams at all
             if (psi->StreamNameLength)
             {
@@ -295,16 +298,16 @@ class CAlternateDataStreams
                 do
                 {
                     CWideString sName;
-                    size_t const sLen = (psi->StreamNameLength / sizeof(WCHAR));
+                    size_t const sLen = (psi->StreamNameLength / sizeof(WCHAR)); //-V104
                     if (sName.reAlloc(sLen + 1))
                     {
-                        memcpy(sName.getBuf(), psi->StreamName, psi->StreamNameLength);
+                        memcpy(sName.getBuf(), psi->StreamName, psi->StreamNameLength); //-V106
                         sName.getBuf()[sLen] = 0;
                         m_StreamNames[i] = new CWideString(sName);
                         ++i;
                     } // TODO: else store error
                     ULONG NextEntryOffset = psi->NextEntryOffset;
-                    curr += NextEntryOffset;
+                    curr += (size_t)NextEntryOffset; //-V201
                     psi = reinterpret_cast<PFILE_STREAM_INFORMATION>(NextEntryOffset ? curr : 0);
                 } while (psi);
             }
@@ -319,7 +322,7 @@ class CAlternateDataStreams
     {
         if (m_StreamNames)
         {
-            for (DWORD i = 0; i < m_StreamCount; i++)
+            for (size_t i = 0; i < m_StreamCount; i++) //-V104
             {
                 delete m_StreamNames[i];
             }
@@ -332,11 +335,11 @@ class CAlternateDataStreams
     CWideString m_Path;
     DWORD const m_Attr;
     DWORD const m_OpenFlags;
-    NtQueryInformationFile_t m_NtQueryInformationFile;
+    NtQueryInformationFile_t m_NtQueryInformationFile; //-V122
     DWORD mutable m_StreamCount;
     CVerySimpleBuf<BYTE> mutable m_Buffer;
     DWORD mutable m_BufSize;
-    PWideString* m_StreamNames;
+    PWideString* m_StreamNames; //-V122
 };
 
 #endif // __ALTERNATEDATASTREAMS_H_VER__

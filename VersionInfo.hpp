@@ -36,19 +36,20 @@
 
 #include <Windows.h>
 #include <tchar.h>
+#pragma warning(push)
 #pragma warning(disable : 4995)
 #if defined(DDKBUILD)
 #    include <stdio.h>
 #else
 #    include <cstdio>
 #endif
-#pragma warning(default : 4995)
+#pragma warning(pop)
 #pragma comment(lib, "delayimp")
 
 class CVersionInfo
 {
-    LPVOID m_lpVerInfo;
-    VS_FIXEDFILEINFO* m_pFixedFileInfo;
+    LPVOID m_lpVerInfo;                 //-V122
+    VS_FIXEDFILEINFO* m_pFixedFileInfo; //-V122
     DWORD m_useTranslation;
 
   public:
@@ -66,9 +67,9 @@ class CVersionInfo
                 {
                     if (LPVOID pVerInfoRO = ::LockResource(hVersionResourceData))
                     {
-                        if (NULL != (m_lpVerInfo = ::LocalAlloc(LPTR, dwSize)))
+                        if (NULL != (m_lpVerInfo = ::LocalAlloc(LPTR, (SIZE_T)dwSize))) //-V201
                         {
-                            ::CopyMemory(m_lpVerInfo, pVerInfoRO, dwSize);
+                            ::CopyMemory(m_lpVerInfo, pVerInfoRO, (SIZE_T)dwSize); //-V201
                             UINT uLen;
                             if (::VerQueryValue(m_lpVerInfo, _T("\\"), (LPVOID*)&m_pFixedFileInfo, &uLen))
                             {
@@ -78,7 +79,7 @@ class CVersionInfo
                                 DWORD* translations;
                                 if (::VerQueryValue(m_lpVerInfo, _T("\\VarFileInfo\\Translation"), (LPVOID*)&translations, &uLen))
                                 {
-                                    size_t const numTranslations = uLen / sizeof(DWORD);
+                                    size_t const numTranslations = (size_t)uLen / sizeof(DWORD); //-V201
 #ifdef ATLTRACE2
                                     ATLTRACE2(_T("Number of translations: %u\n"), (UINT)numTranslations);
 #endif // ATLTRACE2
@@ -86,12 +87,12 @@ class CVersionInfo
                                     {
 #ifdef ATLTRACE2
                                         ATLTRACE2(_T("Translation %u: %08X\n"), (UINT)i, translations[i]);
-#endif // ATLTRACE2
-                                        switch (LOWORD(translations[i]))
+#endif                                                                   // ATLTRACE2
+                                        switch (LOWORD(translations[i])) //-V201
                                         {
                                         case MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL): // fall through
                                         case MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US):
-                                            if (1200 == HIWORD(translations[i])) // only Unicode entries
+                                            if (1200 == HIWORD(translations[i])) // only Unicode entries //-V201
                                             {
                                                 m_useTranslation = translations[i];
                                                 return;
@@ -132,7 +133,7 @@ class CVersionInfo
         TCHAR const fmtstr[] = _T("\\StringFileInfo\\%04X%04X\\%s");
         size_t const fmtbuflen = sizeof(fmtstr) / sizeof(fmtstr[0]) + addend;
         TCHAR fullName[fmtbuflen] = {0};
-        _stprintf_s(fullName, fmtbuflen, fmtstr, LOWORD(m_useTranslation), HIWORD(m_useTranslation), lpszKey);
+        _stprintf_s(fullName, fmtbuflen, fmtstr, LOWORD(m_useTranslation), HIWORD(m_useTranslation), lpszKey); //-V201
         fullName[fmtbuflen - 1] = 0;
 
 #ifdef ATLTRACE2

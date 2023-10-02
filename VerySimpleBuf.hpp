@@ -134,11 +134,11 @@ template <typename T> class CVerySimpleBuf
                 memset(m_buf + count, 0, sizeof(T) * (m_count - count));
                 return true;
             }
-            if (0 != (tempBuf = new T[count_]))
+            if (0 != (tempBuf = new T[count_])) //-V668
             {
                 memset(tempBuf, 0, sizeof(T) * count_);
             }
-            if (tempBuf && m_buf)
+            if (tempBuf && m_buf) //-V668
             {
                 memcpy(tempBuf, m_buf, sizeof(T) * getMin_(count, m_count));
             }
@@ -165,8 +165,8 @@ template <typename T> class CVerySimpleBuf
     }
 
   protected:
-    T* m_buf;
-    size_t m_count;
+    T* m_buf;       //-V122
+    size_t m_count; //-V122
 
     inline size_t getCeil_(size_t count) const
     {
