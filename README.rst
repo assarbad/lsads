@@ -37,6 +37,8 @@ following ways::
     premake4 vs2013
     premake4 vs2015
     premake4 vs2017
+    premake4 vs2019
+    premake4 vs2022
 
 The earlier Visual Studio versions may work, but no guarantees.
 

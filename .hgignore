@@ -26,5 +26,8 @@ buildlog.html
 *.7z
 *.7z.asc
 .vs/**
-lsads.vs15.*
 .git/
+obj/
+x64/
+Release/
+Debug/

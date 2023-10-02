@@ -31,18 +31,18 @@
 #ifndef __VERSIONINFO_H_VER__
 #define __VERSIONINFO_H_VER__ 2018030119
 #if (defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP)
-#pragma once
+#    pragma once
 #endif // Check for "#pragma once" support
 
 #include <Windows.h>
 #include <tchar.h>
-#pragma warning(disable:4995)
+#pragma warning(disable : 4995)
 #if defined(DDKBUILD)
-#include <stdio.h>
+#    include <stdio.h>
 #else
-#include <cstdio>
+#    include <cstdio>
 #endif
-#pragma warning(default:4995)
+#pragma warning(default : 4995)
 #pragma comment(lib, "delayimp")
 
 class CVersionInfo
@@ -50,7 +50,8 @@ class CVersionInfo
     LPVOID m_lpVerInfo;
     VS_FIXEDFILEINFO* m_pFixedFileInfo;
     DWORD m_useTranslation;
-public:
+
+  public:
     CVersionInfo(HINSTANCE hInstance)
         : m_lpVerInfo(NULL)
         , m_pFixedFileInfo(NULL)
@@ -124,15 +125,15 @@ public:
             return NULL;
         }
         size_t const addend = MAX_PATH;
-        if(_tcslen(lpszKey) >= addend)
+        if (_tcslen(lpszKey) >= addend)
         {
             return NULL;
         }
         TCHAR const fmtstr[] = _T("\\StringFileInfo\\%04X%04X\\%s");
-        size_t const fmtbuflen = sizeof(fmtstr)/sizeof(fmtstr[0]) + addend;
+        size_t const fmtbuflen = sizeof(fmtstr) / sizeof(fmtstr[0]) + addend;
         TCHAR fullName[fmtbuflen] = {0};
         _stprintf_s(fullName, fmtbuflen, fmtstr, LOWORD(m_useTranslation), HIWORD(m_useTranslation), lpszKey);
-        fullName[fmtbuflen-1] = 0;
+        fullName[fmtbuflen - 1] = 0;
 
 #ifdef ATLTRACE2
         ATLTRACE2(_T("Full name: %s\n"), fullName);

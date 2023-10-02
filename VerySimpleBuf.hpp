@@ -6,12 +6,12 @@
 #ifndef __VERYSIMPLEBUF_HPP_VER__
 #define __VERYSIMPLEBUF_HPP_VER__ 2018030923
 #if !defined(__VERYSIMPLEBUF_MULTI_INC__) && ((defined(_MSC_VER) && (_MSC_VER >= 1020)) || defined(__MCPP))
-#pragma once
+#    pragma once
 #endif // Check for "#pragma once" support
 
 template <typename T> class CVerySimpleBuf
 {
-public:
+  public:
     typedef T ElemType;
 
     CVerySimpleBuf(size_t count = 0)
@@ -32,7 +32,7 @@ public:
         : m_buf(0)
         , m_count(0)
     {
-        if(buf)
+        if (buf)
         {
             operator=(buf);
         }
@@ -45,10 +45,10 @@ public:
 
     CVerySimpleBuf& operator=(const CVerySimpleBuf& rval)
     {
-        if(&rval != this)
+        if (&rval != this)
         {
             reAlloc(0);
-            if(rval.getBuf() && reAlloc(rval.getCount(), true))
+            if (rval.getBuf() && reAlloc(rval.getCount(), true))
             {
                 memcpy(getBuf(), rval.getBuf(), getMin_(getByteCount(), rval.getByteCount()));
             }
@@ -59,14 +59,14 @@ public:
     CVerySimpleBuf& operator=(const T* buf)
     {
         reAlloc(0);
-        if(buf)
+        if (buf)
         {
             const size_t len = getBufLenZ_<const T*>(buf);
-            if(!len)
+            if (!len)
             {
                 reAlloc(1);
             }
-            else if(reAlloc(len + 1, true))
+            else if (reAlloc(len + 1, true))
             {
                 memcpy(getBuf(), buf, len * sizeof(T));
                 getBuf()[len] = 0;
@@ -77,7 +77,7 @@ public:
 
     CVerySimpleBuf& operator+=(const CVerySimpleBuf& rval)
     {
-        if(rval.getCountZ() && reAlloc(getCountZ() + rval.getCountZ()))
+        if (rval.getCountZ() && reAlloc(getCountZ() + rval.getCountZ()))
         {
             memcpy(getBuf() + getCountZ(), rval.getBuf(), sizeof(T) * rval.getCountZ());
         }
@@ -87,7 +87,7 @@ public:
     CVerySimpleBuf& operator+=(const T* buf)
     {
         const size_t len = getBufLenZ_<const T*>(buf);
-        if(len && reAlloc(getCountZ() + len))
+        if (len && reAlloc(getCountZ() + len))
         {
             memcpy(getBuf() + getCountZ(), buf, sizeof(T) * len);
         }
@@ -116,7 +116,7 @@ public:
 
     void clear()
     {
-        if(m_buf)
+        if (m_buf)
         {
             memset(m_buf, 0, m_count * sizeof(T));
         }
@@ -126,19 +126,19 @@ public:
     {
         T* tempBuf = 0;
         size_t count_ = 0;
-        if(count)
+        if (count)
         {
-            count_ = (!exact) ? getCeil_(count+1) : count;
-            if(count_ <= m_count)
+            count_ = (!exact) ? getCeil_(count + 1) : count;
+            if (count_ <= m_count)
             {
                 memset(m_buf + count, 0, sizeof(T) * (m_count - count));
                 return true;
             }
-            if(0 != (tempBuf = new T[count_]))
+            if (0 != (tempBuf = new T[count_]))
             {
                 memset(tempBuf, 0, sizeof(T) * count_);
             }
-            if(tempBuf && m_buf)
+            if (tempBuf && m_buf)
             {
                 memcpy(tempBuf, m_buf, sizeof(T) * getMin_(count, m_count));
             }
@@ -163,7 +163,8 @@ public:
     {
         return m_count * sizeof(T);
     }
-protected:
+
+  protected:
     T* m_buf;
     size_t m_count;
 

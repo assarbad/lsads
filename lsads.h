@@ -14,9 +14,8 @@
 #define __LADS_H_VERSION__ 2017091421
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
-#pragma once
+#    pragma once
 #endif
-
 
 #include "exeversion.h"
 #include <Windows.h>

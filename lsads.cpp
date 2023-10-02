@@ -20,7 +20,7 @@
 
 #include <cstdio>
 #ifdef _DEBUG
-#include <crtdbg.h>
+#    include <crtdbg.h>
 #endif // _DEBUG
 #include <tchar.h>
 #include "lsads.h"
@@ -29,16 +29,17 @@
 #include "VersionInfo.hpp"
 #pragma comment(lib, "delayimp")
 
-namespace {
-    BOOL isCommandLineSwitch(_TCHAR *arg, const _TCHAR *switchName = NULL)
+namespace
+{
+    BOOL isCommandLineSwitch(_TCHAR* arg, const _TCHAR* switchName = NULL)
     {
-        if(arg && wcslen(arg) > 2 && arg[0] == L'-' && arg[1] == L'-')
+        if (arg && wcslen(arg) > 2 && arg[0] == L'-' && arg[1] == L'-')
         {
-            if(!switchName)
+            if (!switchName)
             {
                 return TRUE;
             }
-            if(0 == wcscmp(&arg[2], switchName))
+            if (0 == wcscmp(&arg[2], switchName))
             {
                 return TRUE;
             }
@@ -53,43 +54,37 @@ namespace {
         ::VirtualQuery(&iDummy, &mbi, sizeof(mbi));
         return HMODULE(mbi.AllocationBase);
     }
-}
+} // namespace
 
-int __cdecl _tmain(int argc, _TCHAR *argv[])
+int __cdecl _tmain(int argc, _TCHAR* argv[])
 {
 #ifdef _DEBUG
     _CrtSetDbgFlag(_CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_ALLOC_MEM_DF);
 #endif // _DEBUG
-    if(2 <= argc)
+    if (2 <= argc)
     {
         bool show_logo = true;
         int fname_arg = 1;
-        while(isCommandLineSwitch(argv[fname_arg]))
+        while (isCommandLineSwitch(argv[fname_arg]))
         {
-            if(isCommandLineSwitch(argv[fname_arg], L"nologo"))
+            if (isCommandLineSwitch(argv[fname_arg], L"nologo"))
                 show_logo = false;
             fname_arg++;
         }
 
-        if(show_logo)
+        if (show_logo)
         {
             CVersionInfo verinfo(GetInstanceHandle());
-            _tprintf(_T("%s %s written by %s\n")
-                , verinfo[_T("OriginalFilename")]
-                , verinfo[_T("FileVersion")]
-                , verinfo[_T("CompanyName")]
-            );
+            _tprintf(_T("%s %s written by %s\n"), verinfo[_T("OriginalFilename")], verinfo[_T("FileVersion")], verinfo[_T("CompanyName")]);
 #ifdef HG_REV_ID
-            _tprintf(_T("\tRevision: %s\n")
-                , verinfo[_T("Mercurial revision")]
-            );
+            _tprintf(_T("\tRevision: %s\n"), verinfo[_T("Mercurial revision")]);
 #endif
             _tprintf(_T("\n"));
         }
 
         CAlternateDataStreams ads(argv[fname_arg]);
         _tprintf(_T("%s (%u)\n"), ads.getPath(), ads.getStreamCount());
-        for(size_t i = 0; ads[i]; i++)
+        for (size_t i = 0; ads[i]; i++)
         {
             CAlternateDataStreams::CWideString ws(ads.getPath());
             ws += ads[i];

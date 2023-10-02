@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{8CB69029-E316-2267-CA26-35462E7D2F4D}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{D4ED5723-0180-5EA2-3EBD-07463C6CD345}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{FC99AB30-8760-66C8-8270-7AAEA8EA5796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{8CB69029-E316-2267-CA26-35462E7D2F4D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Special Files">
       <UniqueIdentifier>{76E1FB3D-FC36-5CEB-6738-D280EB50B33D}</UniqueIdentifier>
@@ -30,6 +30,9 @@
     <None Include="premake4.lua">
       <Filter>Special Files</Filter>
     </None>
+    <None Include=".editorconfig" />
+    <None Include=".clang-format" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exeversion.h">
