@@ -27,7 +27,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(ProjectDir)\hgid.cmd&quot;"
+				CommandLine="call &quot;$(ProjectDir)\hgid.cmd&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -112,7 +112,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(ProjectDir)\hgid.cmd&quot;"
+				CommandLine="call &quot;$(ProjectDir)\hgid.cmd&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -198,7 +198,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(ProjectDir)\hgid.cmd&quot;"
+				CommandLine="call &quot;$(ProjectDir)\hgid.cmd&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -285,7 +285,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(ProjectDir)\hgid.cmd&quot;"
+				CommandLine="call &quot;$(ProjectDir)\hgid.cmd&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -380,6 +380,10 @@
 			RelativePath=".gitignore"
 			>
 		</File>
+		<File
+			RelativePath="Directory.Build.props"
+			>
+		</File>
 		<Filter
 			Name="Header Files"
 			Filter=""
@@ -448,6 +452,14 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="project.early.props"
+			>
+		</File>
+		<File
+			RelativePath="project.late.props"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

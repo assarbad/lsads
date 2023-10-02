@@ -99,7 +99,7 @@
       <AdditionalOptions>/delay:nobind /delayload:version.dll %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PreBuildEvent>
-      <Command>&quot;$(ProjectDir)\hgid.cmd&quot;</Command>
+      <Command>call &quot;$(ProjectDir)\hgid.cmd&quot;</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +119,7 @@
       <AdditionalOptions>/delay:nobind /delayload:version.dll %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PreBuildEvent>
-      <Command>&quot;$(ProjectDir)\hgid.cmd&quot;</Command>
+      <Command>call &quot;$(ProjectDir)\hgid.cmd&quot;</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,7 +140,7 @@
       <AdditionalOptions>/delay:nobind /delayload:version.dll /release %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PreBuildEvent>
-      <Command>&quot;$(ProjectDir)\hgid.cmd&quot;</Command>
+      <Command>call &quot;$(ProjectDir)\hgid.cmd&quot;</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -161,7 +161,7 @@
       <AdditionalOptions>/delay:nobind /delayload:version.dll /release /subsystem:console,5.02 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PreBuildEvent>
-      <Command>&quot;$(ProjectDir)\hgid.cmd&quot;</Command>
+      <Command>call &quot;$(ProjectDir)\hgid.cmd&quot;</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ImportGroup Label="PropertySheets">
@@ -185,6 +185,9 @@
     <None Include="setvcvars.cmd" />
     <None Include="README.rst" />
     <None Include="premake4.lua" />
+    <None Include="Directory.Build.props" />
+    <None Include="project.early.props" />
+    <None Include="project.late.props" />
     <None Include=".editorconfig" />
     <None Include=".clang-format" />
     <None Include=".gitignore" />
