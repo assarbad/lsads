@@ -6,7 +6,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __ALTERNATEDATASTREAMS_H_VER__
-#define __ALTERNATEDATASTREAMS_H_VER__ 2018030923
+#define __ALTERNATEDATASTREAMS_H_VER__ 2018032722
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #    pragma once
 #endif // Check for "#pragma once" support
@@ -20,7 +20,26 @@
 #    pragma warning(pop)
 #endif // __NTNATIVE_H_VER__
 
-#define WIN32_UNICODE_PREFIX L"\\\\?\\"
+#ifndef WIN32_FILE_NAMESPACE
+#    define WIN32_FILE_NAMESPACE L"\\\\?\\"
+#endif // WIN32_FILE_NAMESPACE
+#ifndef WIN32_DEVICE_NAMESPACE
+#    define WIN32_DEVICE_NAMESPACE L"\\\\.\\"
+#endif // WIN32_DEVICE_NAMESPACE
+#ifndef NT_OBJMGR_NAMESPACE
+#    define NT_OBJMGR_NAMESPACE L"\\??\\"
+#endif // NT_OBJMGR_NAMESPACE
+
+#ifndef WIN32_FILE_NAMESPACE_A
+#    define WIN32_FILE_NAMESPACE_A "\\\\?\\"
+#endif // WIN32_FILE_NAMESPACE_A
+#ifndef WIN32_DEVICE_NAMESPACE_A
+#    define WIN32_DEVICE_NAMESPACE_A "\\\\.\\"
+#endif // WIN32_DEVICE_NAMESPACE_A
+#ifndef NT_OBJMGR_NAMESPACE_A
+#    define NT_OBJMGR_NAMESPACE_A L"\\??\\"
+#endif // NT_OBJMGR_NAMESPACE_A
+
 #define DATA_TAG_NAME        L":$DATA"
 
 class CAlternateDataStreams
@@ -193,7 +212,7 @@ class CAlternateDataStreams
     {
         if (Path)
         {
-            WCHAR const Win32Prefix[] = WIN32_UNICODE_PREFIX;
+            WCHAR const Win32Prefix[] = WIN32_FILE_NAMESPACE;
             CVerySimpleBuf<WCHAR> sPath((0 != wcsncmp(Win32Prefix, Path, wcslen(Win32Prefix))) ? Win32Prefix : L"");
             if (sPath.getCountZ()) // Only do anything if the path doesn't have the prefix, yet
             {

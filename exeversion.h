@@ -6,7 +6,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef __EXEVERSION_H_VER__
-#define __EXEVERSION_H_VER__ 2017091421
+#define __EXEVERSION_H_VER__ 2023100220
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #    pragma once
@@ -28,19 +28,18 @@
 #define FILE_PATCH         PRD_PATCH         // patch number
 #define FILE_BUILD         PRD_BUILD         // build number
 #define FILE_BUILD_NUMERIC PRD_BUILD_NUMERIC // build number for product
-#define EXE_YEAR           2010 - 2013, 2017 // current year or timespan (e.g. 2003-2007)
-#define TEXT_WEBSITE \
-https:               \
-    / ## / assarbad.net                              // website
-#define TEXT_PRODUCTNAME List Alternate Data Streams // product's name
-#define TEXT_FILEDESC                          \
-    Allows to list alternate data streams(ADS) \
-    on files                                             // component description
-#define TEXT_COMPANY      Oliver Schneider(assarbad.net) // company
-#define TEXT_MODULE       lsads                          // module name
-#define TEXT_COPYRIGHT    Written EXE_YEAR by TEXT_COMPANY(PUBLIC DOMAIN / CC0)
-#define TEXT_INTERNALNAME lsads.exe
-#define HG_REPOSITORY     "https://sourceforge.net/p/lsads/code/"
+// clang-format off
+#define EXE_YEAR           2010-2013, 2017 // current year or timespan (e.g. 2003-2007)
+
+#define TEXT_WEBSITE       https:/##/assarbad.net // website
+#define TEXT_PRODUCTNAME   List Alternate Data Streams // product's name
+#define TEXT_FILEDESC      Allows to list alternate data streams(ADS) on files // component description
+#define TEXT_COMPANY       Oliver Schneider(assarbad.net) // company
+#define TEXT_MODULE        lsads                          // module name
+#define TEXT_COPYRIGHT     Written EXE_YEAR by TEXT_COMPANY (PUBLIC DOMAIN / CC0)
+#define TEXT_INTERNALNAME  lsads.exe
+#define HG_REPOSITORY      "https://sourceforge.net/p/lsads/code/"
+// clang-format on
 
 #define _ANSISTRING(text) #text
 #define ANSISTRING(text)  _ANSISTRING(text)

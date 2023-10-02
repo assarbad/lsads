@@ -92,7 +92,7 @@ solution (tgtname .. iif(release, "_release", ""))
         }
 
         configuration {"*"}
-            prebuildcommands{"\"$(ProjectDir)\\hgid.cmd\"",}
+            prebuildcommands{"call \"$(ProjectDir)\\hgid.cmd\"",}
 
         configuration {"Debug", "x32"}
             targetsuffix    ("32D")
